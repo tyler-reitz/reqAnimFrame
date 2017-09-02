@@ -1,27 +1,25 @@
-const getProgress = ({elapsed, total}) => Math.min(elapsed / total, 1)
-const easeOut = progress => Math.pow(--progress, 5) + 1
+const easeOutElastic = progress =>
+  Math.pow(2, -10 * progress) * Math.sin((progress - .1) * 5 * Math.PI) + 1 
 
 const element = document.querySelector('span')
-const finalPosition = 1180
 
 const time = {
   start: performance.now(),
-  total: 2000
+  total: 10000
 }
 
 const tick = now => {
   time.elapsed = now - time.start
-  const progress = getProgress(time)
-  const easing = easeOut(progress)
-  const position = easing * finalPosition
-  
-  element.style.transform = `translate(${position}px)`
+  const progress = time.elapsed / time.total
+  const value = easeOutElastic(progress)
+
+  element.style.transform = `scale(${value}) rotate(${value}turn)`
   
   console.table({
     state: {
       time: time.elapsed,
       progress: progress,
-      position: position
+      value: value
     }
   })
   
