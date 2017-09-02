@@ -11,19 +11,30 @@
     }
     body {
       display: grid;
-      grid: 270px / 270px;
       align-content: center;
       justify-content: center;
       margin: 0;
     }
-    span {
-      background: turquoise;
-      will-change: transform;
+    svg {
+      width: 250px;
+      height: 250px;
+      color: #5bf;
+    }
+    circle {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 10;
+    }
+    polygon {
+      fill: currentColor;
     }
   </style>
 </head>
 <body>
-  <span></span>
+  <svg>
+    <circle cx="125" cy="125" r="120" />
+    <polygon />
+  </svg>
   <script src="/raf-basic-loop.js"></script>
 </body>
 </html>
