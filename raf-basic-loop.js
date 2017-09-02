@@ -40,7 +40,7 @@ const move = () => {
     const cx = startX + delta
 
     circle.setAttribute('cx', cx)
-    progress > 1 ? requestAnimationFrame(tick) : setTimeout(move, 800)
+    progress < 1 ? requestAnimationFrame(tick) : setTimeout(move, 800)
   }
 
   blur(time.start)
