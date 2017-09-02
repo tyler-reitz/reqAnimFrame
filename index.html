@@ -10,12 +10,18 @@
       height: 100vh;
     }
     body {
+<<<<<<< HEAD
       display: grid;
       align-content: center;
       justify-content: center;
+=======
+      display: flex;
+>>>>>>> motion-blur
       margin: 0;
+      align-items: center;
     }
     svg {
+<<<<<<< HEAD
       width: 250px;
       height: 250px;
       color: #5bf;
@@ -27,13 +33,24 @@
     }
     polygon {
       fill: currentColor;
+=======
+      width: 100%;
+      height: 150px;
+>>>>>>> motion-blur
     }
   </style>
 </head>
 <body>
   <svg>
+<<<<<<< HEAD
     <circle cx="125" cy="125" r="120" />
     <polygon />
+=======
+    <filter id="motion-blur" x="-25%" width="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" />
+    </filter>
+    <circle r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)" />
+>>>>>>> motion-blur
   </svg>
   <script src="/raf-basic-loop.js"></script>
 </body>

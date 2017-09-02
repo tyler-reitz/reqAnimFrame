@@ -1,38 +1,50 @@
-const getProgress = ({ elapsed, total }) => Math.min(elapsed / total, 1)
+const getProgress = ({elapsed, total}) => Math.min(elapsed / total, 1)
+const easeOut = progress => Math.pow(--progress, 5) + 1
+const getX = () => Number(circle.getAttribute("cx"))
 
-const easeInOut = progress =>
-  (progress *= 2) < 1
-  ? .5 * Math.pow(progress, 5)
-  : .5 * ((progress -= 2) * Math.pow(progress, 4) + 2)
+const [gaussian, circle] = document.querySelectorAll('feGaussianBlur, circle')
+const startX = getX()
+const deviation = 25
 
-const element = document.querySelector('polygon')
+const blur = start => {
+  const time = {
+    start,
+    total: 800
+  }
 
-const shapes = {
-  play: [85, 70, 180, 125, 180, 125, 85, 180],
-  stop: [85, 85, 165, 85, 165, 165, 85, 165]
+  const tick = now => {
+    time.elapsed = now - time.start
+    const progress = deviation - deviation * getProgress(time)
+    gaussian.setAttribute('stdDeviation', `${progress}, 0`)
+    if (progress) requestAnimationFrame(tick)
+  }
+
+  requestAnimationFrame(tick)
 }
 
-const time = {
-  start: performance.now(),
-  total: 1200
+const move = () => {
+  const distance = window.innerWidth - 2 * startX
+  const backwards = getX() > startX
+
+  const time = {
+    start: performance.now(),
+    total: 1500
+  }
+
+  const tick = now => {
+    time.elapsed = now - time.start
+    
+    const progress = getProgress(time)
+    const easing = easeOut(progress) * distance
+    const delta = backwards ? distance - easing : easing
+    const cx = startX + delta
+
+    circle.setAttribute('cx', cx)
+    progress < 1 ? requestAnimationFrame(tick) : setTimeout(move, 800)
+  }
+
+  blur(time.start)
+  requestAnimationFrame(tick)
 }
 
-const tick = now => {
-  time.elapsed = now - time.start
-
-  const progress = getProgress(time)
-  const easing = easeInOut(progress)
-  const { play, stop } = shapes
-  
-  const points = play.map((start, index) => {
-    const end = stop[index]
-    const distance = end - start
-    const point = start + easing * distance
-    return point
-  })
-  
-  element.setAttribute('points', points.join(' '))
-  if (time.elapsed < time.total) requestAnimationFrame(tick)
-}
-
-requestAnimationFrame(tick)
+move()
