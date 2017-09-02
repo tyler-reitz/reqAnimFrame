@@ -10,20 +10,23 @@
       height: 100vh;
     }
     body {
-      display: grid;
-      grid: 100px / 100px;
-      align-content: center;
+      display: flex;
       margin: 0;
+      align-items: center;
     }
-    span {
-      border-radius: 50%;
-      background: turquoise;
-      will-change: transform;
+    svg {
+      width: 100%;
+      height: 150px;
     }
   </style>
 </head>
 <body>
-  <span></span>
+  <svg>
+    <filter id="motion-blur" x="-25%" width="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" />
+    </filter>
+    <circle r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)" />
+  </svg>
   <script src="/raf-basic-loop.js"></script>
 </body>
 </html>
