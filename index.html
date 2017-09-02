@@ -10,48 +10,28 @@
       height: 100vh;
     }
     body {
-<<<<<<< HEAD
       display: grid;
+      margin: 0;
       align-content: center;
       justify-content: center;
-=======
-      display: flex;
->>>>>>> motion-blur
-      margin: 0;
-      align-items: center;
     }
     svg {
-<<<<<<< HEAD
-      width: 250px;
-      height: 250px;
-      color: #5bf;
+      width: 650px;
+      height: 235px;
     }
     circle {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 10;
+      fill: turquoise;
     }
-    polygon {
-      fill: currentColor;
-=======
-      width: 100%;
-      height: 150px;
->>>>>>> motion-blur
+    path {
+      fill: none;
     }
   </style>
 </head>
 <body>
   <svg>
-<<<<<<< HEAD
-    <circle cx="125" cy="125" r="120" />
-    <polygon />
-=======
-    <filter id="motion-blur" x="-25%" width="150%" color-interpolation-filters="sRGB">
-      <feGaussianBlur in="SourceGraphic" />
-    </filter>
-    <circle r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)" />
->>>>>>> motion-blur
+    <circle r="25" />
+    <path d="M141 25c155 0 210 185 366 185 155 0 155-185 0-185-155 0-210 185-366 185-155 0-155-185 0-185" />
   </svg>
-  <script src="/raf-basic-loop.js"></script>
+  <script src="/along-path.js"></script>
 </body>
 </html>
